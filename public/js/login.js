@@ -5,11 +5,13 @@ const dataForm = document.querySelector(".form-user-data");
 const btnBooking = document.querySelector("#booking-tour");
 const loginOut = async () => {
   try {
-    const res = await axios({
+
+      const res = await axios({
       method: "GET",
       url: "http://127.0.0.1:8000/api/v1/users/logOut",
     });
-    if (res.data.status === "success") location.reload(true);
+    if (res.data.status === "success") location.replace('http://127.0.0.1:8000/overview');
+
   } catch (err) {
     alert(err.response.data);
   }
@@ -92,7 +94,7 @@ if (dataForm)
   dataForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const form = new FormData();
-    form.append("email", document.querySelector("#email").value);
+    form.append("name", document.querySelector("#name").value);
     form.append("password", document.querySelector("#password").value);
     form.append("photo", document.querySelector("#photo").files[0]);
     console.log(document.querySelector("#photo").files);

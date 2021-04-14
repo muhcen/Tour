@@ -98,6 +98,7 @@ exports.protect = async (req, res, next) => {
 };
 
 exports.changePassword = catchAsync(async (req, res, next) => {
+  console.log('=>>>>>>',req.body)
   const { password, newPassword, newPasswordConfirm } = req.body;
   if (!password || !newPassword || !newPasswordConfirm) {
     return next(
@@ -105,9 +106,7 @@ exports.changePassword = catchAsync(async (req, res, next) => {
       404
     );
   }
-  // console.log(req.user);
   const currentUser = await req.user.comparePass(password, req.user.password);
-  // console.log(password, req.user.password);
   if (!currentUser) {
     return next(new AppError("password is not correct", 404));
   }
@@ -116,8 +115,7 @@ exports.changePassword = catchAsync(async (req, res, next) => {
   await user.changePassword(newPassword, newPasswordConfirm);
   await user.save();
 
-  user.save();
-  res.status(404).json({
+  res.status(200).json({
     status: "success",
     message: "password change",
     data: {

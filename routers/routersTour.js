@@ -8,7 +8,7 @@ const router = express.Router();
 router.route("/top-5-cheap").get(controller.top5cheap);
 router
   .route("/")
-  .get(authController.protect, controller.pageAndLimit, controller.getAllTours)
+  .get(authController.protect,authController.checkAccess('admin','user'), controller.pageAndLimit, controller.getAllTours)
   .post(controller.createTour);
 router
   .route("/:id")

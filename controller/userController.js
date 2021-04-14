@@ -25,7 +25,6 @@ const storage = multer.diskStorage({
     const exe = file.mimetype.split("/")[1];
     console.log(exe);
     cb(null, `user-${req.user.id}-${Date.now()}.${exe}`);
-    console.log(exe);
   },
 });
 
@@ -44,13 +43,15 @@ const upload = multer({
 
 exports.uploadPhoto = upload.single("photo");
 exports.uploadMe = catchAsync(async (req, res, next) => {
-  console.log(req.file);
-  console.log(req.body);
+
   if (req.file) req.body.photo = req.file.filename;
+  else delete req.body.photo
   const newUser = await User.findByIdAndUpdate(req.user.id, req.body, {
     next: true,
     runValidators: false,
   });
+  console.log(req.body);
+
   res.status(200).json({
     status: "success",
     data: {

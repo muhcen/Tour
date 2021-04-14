@@ -7,7 +7,7 @@ router.post("/signUp", controller.signUp);
 router.post("/login", controller.login);
 router.get("/logOut", controller.logOut);
 
-router.post("/changePassword", controller.protect, controller.changePassword);
+router.patch("/changePassword", controller.protect, controller.changePassword);
 router.delete("/inactive", controller.protect, controller.inactive);
 router.post("/active", controller.protect, controller.active);
 router.post("/forgetPassword", controller.forgetPassword);

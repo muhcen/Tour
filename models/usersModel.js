@@ -79,7 +79,6 @@ userSchema.methods.activeAcc = function () {
 userSchema.methods.createHash = function () {
   const token = crypto.randomBytes(32).toString("hex");
   this.hash = crypto.createHash("sha256").update(token).digest("hex");
-  console.log(this.hash, token);
   this.hashCreateAt = Date.now() + 10 * 60 * 1000;
   return token;
 };
