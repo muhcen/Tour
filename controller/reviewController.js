@@ -5,16 +5,15 @@ const factory = require("./factoryController");
 
 exports.getReview = factory.getOne(Review);
 exports.getAllReviews = catchAsync(async (req, res, next) => {
-
-  console.log(req.user)
-  const reviews = await Review.find({user:req.user._id})
+  console.log(req.user);
+  const reviews = await Review.find({ user: req.user._id });
   res.status(200).json({
     status: "success",
     data: {
       reviews,
     },
   });
-})
+});
 exports.updateReview = factory.updateOne(Review);
 exports.deleteReview = factory.deleteOne(Review);
 exports.createReview = catchAsync(async (req, res, next) => {

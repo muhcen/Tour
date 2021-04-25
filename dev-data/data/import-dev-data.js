@@ -7,10 +7,8 @@ const User = require("./../../models/usersModel");
 
 dotenv.config({ path: "./config.env" });
 
-const DB = process.env.DATABASE.replace(
-  "<PASSWORD>",
-  process.env.DATABASE_PASSWORD
-);
+const DB =
+  "mongodb+srv://mohsen:VysBxtb6mpWgilWL@cluster0.yt6af.mongodb.net/nators?retryWrites=true&w=majority";
 
 mongoose
   .connect(DB, {
@@ -53,9 +51,10 @@ const deleteData = async () => {
   }
   process.exit();
 };
+// importData();
 
-if (process.argv[2] === "--import") {
-  importData();
-} else if (process.argv[2] === "--delete") {
-  deleteData();
-}
+// if (process.argv[2] === "--import") {
+//   importData();
+// } else if (process.argv[2] === "--delete") {
+//   deleteData();
+// }
