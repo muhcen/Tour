@@ -5,7 +5,7 @@ const router = express.Router({ mergeParams: true });
 
 router
   .route("/")
-  .get(controller.getAllReviews)
+  .get(authController.protect,controller.getAllReviews)
   .post(authController.protect, controller.createReview);
 
 router
