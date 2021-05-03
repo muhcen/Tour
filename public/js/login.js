@@ -2,16 +2,16 @@ const logout = document.querySelector(".nav__el--logout");
 const form = document.querySelector(".form-login");
 const changePasswordForm = document.querySelector(".form-user-settings");
 const dataForm = document.querySelector(".form-user-data");
-const btnBooking = document.querySelector("#booking-tour");
+const btnBooking = document.querySelector("#booking-tour1");
+const book = document.querySelector("#booking-tour");
 const loginOut = async () => {
   try {
-
-      const res = await axios({
+    const res = await axios({
       method: "GET",
       url: "http://127.0.0.1:8000/api/v1/users/logOut",
     });
-    if (res.data.status === "success") location.replace('http://127.0.0.1:8000/overview');
-
+    if (res.data.status === "success")
+      location.replace("http://127.0.0.1:8000/overview");
   } catch (err) {
     alert(err.response.data);
   }
@@ -59,11 +59,11 @@ const login = async (email, password) => {
       },
     });
     if (res.data.status === "success") {
-      console.log(1);
       window.setTimeout(() => {
         location.assign("/overview");
       }, 500);
     }
+    console.log(res);
   } catch (err) {
     console.log(err.response.data);
   }
@@ -107,6 +107,24 @@ if (btnBooking)
     try {
       const session = await axios({
         url: `http://127.0.0.1:8000/api/v1/users/checkout-session/${tourId}`,
+      });
+      console.log(session);
+    } catch (err) {
+      console.log(err.response.data);
+    }
+  });
+
+if (book)
+  book.addEventListener("click", async (e) => {
+    const tour = book.dataset.tourId;
+    console.log(tour);
+    try {
+      const session = await axios({
+        method: "POST",
+        url: `http://127.0.0.1:8000/api/v1/tours/order`,
+        data: {
+          tour,
+        },
       });
       console.log(session);
     } catch (err) {

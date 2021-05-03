@@ -87,10 +87,12 @@ exports.protect = async (req, res, next) => {
   } else if (req.cookies.jwt) {
     token = req.cookies.jwt;
   }
-
+  token = await jwt.verify(req.cookies.jwt, process.env.SECRET_KEY);
   if (!token) {
     return next(new AppError("token is not valid , try again ", 500));
   }
+  console.log(token);
+
   const user = await User.findById(token.id).select("+password");
   req.user = user;
   res.locals.user = user;
@@ -98,7 +100,7 @@ exports.protect = async (req, res, next) => {
 };
 
 exports.changePassword = catchAsync(async (req, res, next) => {
-  console.log('=>>>>>>',req.body)
+  console.log("=>>>>>>", req.body);
   const { password, newPassword, newPasswordConfirm } = req.body;
   if (!password || !newPassword || !newPasswordConfirm) {
     return next(
