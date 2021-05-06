@@ -795,7 +795,7 @@ body {
 }
 
 .footer {
-  background-color: #f7f7f7;
+  background-color: #3f3f3f;
   padding: 6rem 4rem 3rem 4rem;
   font-size: 1.4rem;
   display: grid;
@@ -836,7 +836,7 @@ body {
   margin-left: 1.5rem;
 }
 .footer__nav a {
-  color: #777;
+  color: rgb(255, 255, 255);
   text-decoration: none !important;
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
