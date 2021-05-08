@@ -117,7 +117,6 @@ if (btnBooking)
 if (book)
   book.addEventListener("click", async (e) => {
     const tour = book.dataset.tourId;
-    console.log(tour);
     try {
       const session = await axios({
         method: "POST",
@@ -126,7 +125,10 @@ if (book)
           tour,
         },
       });
-      console.log(session);
+
+      setTimeout(() => {
+        location.assign("/overview");
+      }, 2000);
     } catch (err) {
       console.log(err.response.data);
     }
