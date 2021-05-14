@@ -21,8 +21,10 @@
     "nodemailer": "^6.4.17",
     "nodemon": "^2.0.7",
     "pug": "^3.0.0",
+    "redis": "^3.1.2",
     "slugify": "^1.4.6",
     "stripe": "^8.138.0",
+    "utils": "^0.3.1",
     "validator": "^13.5.2"
   },
   "devDependencies": {
