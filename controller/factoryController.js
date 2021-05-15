@@ -1,7 +1,5 @@
 const catchAsync = require("./../utils/catchAsync");
 const AppError = require("./../utils/appError");
-const clint = require("redis").createClient("redis://localhost:6379");
-const util = require("util");
 
 exports.createOne = (Model) =>
   catchAsync(async (req, res, next) => {
@@ -23,7 +21,6 @@ exports.getAllOne = (Model) =>
 
     let queryStr = JSON.stringify(queryObj);
 
-    console.log(redis);
     queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
     let fields;
     if (req.query.fields) fields = req.query.fields.split(",").join(" ");
@@ -31,7 +28,8 @@ exports.getAllOne = (Model) =>
       .sort(req.query.sort)
       .select(fields)
       .limit(req.limit)
-      .skip(req.skip);
+      .skip(req.skip)
+      .cache();
 
     const doc = await query;
 
@@ -47,24 +45,9 @@ exports.getAllOne = (Model) =>
 exports.getOne = (Model, populate) =>
   catchAsync(async (req, res, next) => {
     let doc;
-
-    clint.get = util.promisify(clint.get);
-    clint.get = util.promisify(clint.get);
-
-    const cacheDoc = await clint.get(req.params.id);
-
-    if (cacheDoc) {
-      console.log("serve cashe");
-      return res.status(200).json({
-        status: "success",
-        data: {
-          doc: JSON.parse(cacheDoc),
-        },
-      });
-    }
-
-    if (populate) doc = await Model.findById(req.params.id).populate(populate);
-    else doc = await Model.findById(req.params.id);
+    if (populate)
+      doc = await Model.findById(req.params.id).populate(populate).cache();
+    else doc = await Model.findById(req.params.id).cache();
     if (!doc) {
       return next(
         new AppError("doc whit id is not fond. please enter correct id", 404)
@@ -76,9 +59,6 @@ exports.getOne = (Model, populate) =>
         doc,
       },
     });
-
-    console.log("serve mongodb");
-    clint.set(req.params.id, JSON.stringify(doc));
   });
 
 exports.updateOne = (Model) =>

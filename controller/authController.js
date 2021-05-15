@@ -91,7 +91,6 @@ exports.protect = async (req, res, next) => {
   if (!token) {
     return next(new AppError("token is not valid , try again ", 500));
   }
-  console.log(token);
 
   const user = await User.findById(token.id).select("+password");
   req.user = user;
@@ -100,7 +99,6 @@ exports.protect = async (req, res, next) => {
 };
 
 exports.changePassword = catchAsync(async (req, res, next) => {
-  console.log("=>>>>>>", req.body);
   const { password, newPassword, newPasswordConfirm } = req.body;
   if (!password || !newPassword || !newPasswordConfirm) {
     return next(

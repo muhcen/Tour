@@ -39,6 +39,7 @@ const routerTours = require("./routers/routersTour");
 const routerUsers = require("./routers/routerUser");
 const routerReviews = require("./routers/routersReview");
 const routerBookings = require("./routers/routersBookings");
+require("./utils/casheServer");
 
 app.use("/", routerViews);
 app.use("/api/v1/tours", routerTours);
