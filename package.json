@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "node server.js",
     "debug": "ndb server.js",
-    "test": "jest server.js"
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
@@ -23,6 +23,7 @@
     "nodemailer": "^6.4.17",
     "nodemon": "^2.0.7",
     "pug": "^3.0.0",
+    "puppeteer": "^9.1.1",
     "redis": "^3.1.2",
     "slugify": "^1.4.6",
     "stripe": "^8.138.0",
