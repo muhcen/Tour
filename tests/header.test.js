@@ -1,17 +1,13 @@
-const puppeteer = require('puppeteer');
 const dotenv = require('dotenv').config({ path: './config.env' });
-let browser, page;
-const { tokenFactory } = require('./factories/tokenFactory');
+let page;
+const customPage = require('./helper/customPage');
 beforeEach(async () => {
-    browser = await puppeteer.launch({
-        headless: false,
-    });
-    page = await browser.newPage();
+    page = await customPage.build();
     await page.goto('http://127.0.0.1:8000');
 }, 10000);
 
 afterEach(async () => {
-    await browser.close();
+    await page.close();
 });
 
 test('the header has correct name', async () => {
@@ -28,13 +24,7 @@ test('click an the button and check', async () => {
 });
 
 test('when sgined in, show logout button', async () => {
-    const token = tokenFactory('5c8a1e1a2f8fb814b56fa182');
-
-    await page.setCookie({ name: 'jwt', value: token });
-
-    await page.goto('http://127.0.0.1:8000');
-
-    await page.waitFor('a.nav__el--logout');
+    await page.login();
 
     const text = await page.$eval('a.nav__el--logout', (el) => el.innerHTML);
     expect(text).toEqual('Log Out');
