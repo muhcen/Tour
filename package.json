@@ -1,36 +1,36 @@
 {
-  "name": "doci",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "node server.js",
-    "debug": "ndb server.js",
-    "test": "jest"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "bcrypt": "^5.0.0",
-    "cookie-parser": "^1.4.5",
-    "cookies-parser": "^1.2.0",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "jest": "^26.6.3",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.11.13",
-    "multer": "^1.4.2",
-    "nodemailer": "^6.4.17",
-    "nodemon": "^2.0.7",
-    "pug": "^3.0.0",
-    "puppeteer": "^9.1.1",
-    "redis": "^3.1.2",
-    "slugify": "^1.4.6",
-    "stripe": "^8.138.0",
-    "utils": "^0.3.1",
-    "validator": "^13.5.2"
-  },
-  "devDependencies": {
-    "ndb": "^1.1.5"
-  }
+    "name": "doci",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "nodemon server.js --watch",
+        "debug": "ndb server.js",
+        "test": "jest"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "bcrypt": "^5.0.0",
+        "cookie-parser": "^1.4.5",
+        "cookies-parser": "^1.2.0",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "jest": "^26.6.3",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^5.11.13",
+        "multer": "^1.4.2",
+        "nodemailer": "^6.4.17",
+        "nodemon": "^2.0.7",
+        "pug": "^3.0.0",
+        "puppeteer": "^9.1.1",
+        "redis": "^3.1.2",
+        "slugify": "^1.4.6",
+        "stripe": "^8.138.0",
+        "utils": "^0.3.1",
+        "validator": "^13.5.2"
+    },
+    "devDependencies": {
+        "ndb": "^1.1.5"
+    }
 }
