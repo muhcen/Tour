@@ -29,7 +29,8 @@ exports.getAllOne = (Model) =>
             .select(fields)
             .limit(req.limit)
             .skip(req.skip)
-            .cache({ id: req.user._id });
+            .cache({ id: req.user._id })
+            .explain();
 
         const doc = await query;
 
