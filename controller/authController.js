@@ -84,6 +84,10 @@ exports.protect = async (req, res, next) => {
     }
 
     const user = await User.findById(token.id).select('+password');
+
+    if (!user) {
+        return next(new AppError('user is not found , try again ', 500));
+    }
     req.user = user;
     res.locals.user = user;
     next();

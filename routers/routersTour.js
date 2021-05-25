@@ -32,6 +32,8 @@ router
         controller.deleteTour,
     );
 
+router.post('/:id/like', authController.protect, authController.delCache, controller.like);
+
 router.route('/order').post(authController.protect, controller.createOrder);
 
 router.use('/:id/reviews', reviewRouter);

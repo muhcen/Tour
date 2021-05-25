@@ -109,6 +109,12 @@ const tourSchema = new mongoose.Schema(
             },
         ],
         slug: String,
+        likes: [
+            {
+                type: mongoose.Schema.ObjectId,
+                ref: 'User',
+            },
+        ],
     },
     {
         toJSON: { virtuals: true },
