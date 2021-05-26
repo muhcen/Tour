@@ -36,6 +36,8 @@ router.post('/:id/like', authController.protect, authController.delCache, contro
 
 router.route('/order').post(authController.protect, controller.createOrder);
 
+router.route('/getManyTours').post(authController.protect, controller.getManyTours);
+
 router.use('/:id/reviews', reviewRouter);
 
 module.exports = router;

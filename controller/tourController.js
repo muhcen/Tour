@@ -114,3 +114,15 @@ exports.like = catchAsync(async (req, res, next) => {
         },
     });
 });
+
+exports.getManyTours = catchAsync(async (req, res, next) => {
+    const arr = req.query.name[0].split(',');
+
+    const tours = await Tour.find().where('name').in(arr);
+    res.status(200).json({
+        status: 'success',
+        data: {
+            tours,
+        },
+    });
+});
