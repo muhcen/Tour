@@ -74,15 +74,21 @@ exports.loginUser = async (req, res, next) => {
 exports.protect = async (req, res, next) => {
     let token;
     if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
-        token = await jwt.verify(req.headers.authorization.split(' ')[1], process.env.SECRET_KEY);
+        token = await req.headers.authorization.split(' ')[1];
     } else if (req.cookies.jwt) {
         token = req.cookies.jwt;
     }
-    token = await jwt.verify(req.cookies.jwt, process.env.SECRET_KEY);
+
+    await jwt.verify(token, process.env.SECRET_KEY, (err, decode) => {
+        if (err) {
+            return next(new AppError('token is not valid , try again ', 500));
+        }
+        token = decode;
+    });
+
     if (!token) {
         return next(new AppError('token is not valid , try again ', 500));
     }
-
     const user = await User.findById(token.id).select('+password');
 
     if (!user) {
