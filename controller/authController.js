@@ -95,7 +95,6 @@ exports.protect = async (req, res, next) => {
         return next(new AppError('user is not found , try again ', 500));
     }
     req.user = user;
-    res.locals.user = user;
     next();
 };
 
