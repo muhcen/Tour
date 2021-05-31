@@ -5,6 +5,7 @@ const app = express();
 const AppError = require('./utils/appError');
 const cookiesParser = require('cookie-parser');
 const errorHandler = require('./controller/errorController');
+
 const host = process.env.DATABASE.replace('<PASSWORD>', process.env.DATABASE_PASSWORD);
 require('./utils/casheServer');
 
