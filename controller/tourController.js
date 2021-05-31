@@ -116,9 +116,19 @@ exports.like = catchAsync(async (req, res, next) => {
 });
 
 exports.getManyTours = catchAsync(async (req, res, next) => {
-    const arr = req.query.name[0].split(',');
+    let arr = req.query.name;
+    if (!arr) {
+        return next(new AppError('please input tours name'));
+    }
+    arr = arr[0].split(',');
+    console.log(arr);
 
     const tours = await Tour.find().where('name').in(arr);
+
+    if (!tours) {
+        return next(new AppError('dont found any tours with names'));
+    }
+
     res.status(200).json({
         status: 'success',
         data: {

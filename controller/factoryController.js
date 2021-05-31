@@ -51,7 +51,7 @@ exports.getOne = (Model, populate) =>
                 .cache({ id: req.user._id });
         else doc = await Model.findById(req.params.id).cache({ id: req.user._id });
         if (!doc) {
-            return next(new AppError('doc whit id is not fond. please enter correct id', 404));
+            return next(new AppError('doc with id is not found. please enter correct id', 404));
         }
         res.status(200).json({
             status: 'success',

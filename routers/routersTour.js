@@ -6,6 +6,8 @@ const reviewRouter = require('./../routers/routersReview');
 const router = express.Router();
 
 router.route('/top-5-cheap').get(controller.top5cheap);
+router.route('/getManyTours').get(authController.protect, controller.getManyTours);
+
 router
     .route('/')
     .get(
@@ -35,8 +37,6 @@ router
 router.post('/:id/like', authController.protect, authController.delCache, controller.like);
 
 router.route('/order').post(authController.protect, controller.createOrder);
-
-router.route('/getManyTours').get(authController.protect, controller.getManyTours);
 
 router.use('/:id/reviews', reviewRouter);
 
