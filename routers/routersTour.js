@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.route('/top-5-cheap').get(controller.top5cheap);
 router.route('/getManyTours').get(authController.protect, controller.getManyTours);
+router.route('/avgReviewTours').get(authController.protect, controller.avgReviewTours);
 
 router
     .route('/')

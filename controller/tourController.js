@@ -136,3 +136,24 @@ exports.getManyTours = catchAsync(async (req, res, next) => {
         },
     });
 });
+
+exports.avgReviewTours = catchAsync(async (req, res, next) => {
+    const avg = await Tour.aggregate([
+        {
+            $group: {
+                _id: '$tour',
+                numberTours: { $sum: 1 },
+                avgRating: { $avg: '$ratingsAverage' },
+            },
+        },
+    ]);
+
+    delete avg[0]._id;
+
+    res.status(200).json({
+        status: 'success',
+        data: {
+            avg,
+        },
+    });
+});
