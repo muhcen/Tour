@@ -32,3 +32,9 @@ exports.account = catchAsync(async (req, res, next) => {
         title: 'My Account',
     });
 });
+
+exports.error = catchAsync(async (req, res, next) => {
+    res.status(404).render('error', {
+        title: 'not found',
+    });
+});
