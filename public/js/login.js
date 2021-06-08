@@ -112,23 +112,3 @@ if (btnBooking)
             console.log(err.response.data);
         }
     });
-
-if (book)
-    book.addEventListener('click', async (e) => {
-        const tour = book.dataset.tourId;
-        try {
-            const session = await axios({
-                method: 'POST',
-                url: `http://127.0.0.1:8000/api/v1/tours/order`,
-                data: {
-                    tour,
-                },
-            });
-
-            setTimeout(() => {
-                location.assign('/');
-            }, 2000);
-        } catch (err) {
-            console.log(err.response.data);
-        }
-    });
