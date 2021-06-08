@@ -9,6 +9,6 @@ router.get('/', authController.loginUser, controller.overview);
 router.get('/tour/:slug', authController.loginUser, controller.getTour);
 router.get('/login', authController.loginUser, controller.login);
 router.get('/Me', authController.loginUser, controller.account);
-router.get('/*', controller.error);
+// router.get('/*', controller.error);
 
 module.exports = router;

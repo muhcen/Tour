@@ -37,11 +37,13 @@ const routerViews = require('./routers/routerViews');
 const routerTours = require('./routers/routersTour');
 const routerUsers = require('./routers/routerUser');
 const routerReviews = require('./routers/routersReview');
+const routerBooking = require('./routers/routerBooking');
 
 app.use('/', routerViews);
 app.use('/api/v1/tours', routerTours);
 app.use('/api/v1/users', routerUsers);
 app.use('/api/v1/reviews', routerReviews);
+app.use('/api/v1/booking', routerBooking);
 
 app.all('*', (req, res, next) => {
     next(new AppError(`can not find ${req.originalUrl} route`, 404));
