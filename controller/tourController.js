@@ -1,5 +1,4 @@
 const Tour = require('../models/toursModel');
-const Order = require('../models/orderModel');
 
 const jwt = require('jsonwebtoken');
 const AppError = require('./../utils/appError');
@@ -79,19 +78,6 @@ exports.updateTour = catchAsync(async (req, res, next) => {
         status: 'success',
         data: {
             tour,
-        },
-    });
-});
-
-exports.createOrder = catchAsync(async (req, res, next) => {
-    req.body.user = req.user.id;
-
-    const order = await Order.create(req.body);
-    console.log(order);
-    res.status(200).json({
-        status: 'success',
-        data: {
-            order,
         },
     });
 });
