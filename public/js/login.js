@@ -1,9 +1,13 @@
+const stripe = Stripe(
+    'pk_test_51IT0v1FB41rzsIXye48A3C8RGaJdqhXa7Y5lWTjmQTtDLBtGoLGRjU701Arnp19szeHFDtzswnvN2y8WJfeLc5nV00sh4LuME6',
+);
+
 const logout = document.querySelector('.nav__el--logout');
 const form = document.querySelector('.form-login');
 const changePasswordForm = document.querySelector('.form-user-settings');
 const dataForm = document.querySelector('.form-user-data');
-const btnBooking = document.querySelector('#booking-tour1');
 const book = document.querySelector('#booking-tour');
+
 const loginOut = async () => {
     try {
         const res = await axios({
@@ -100,14 +104,19 @@ if (dataForm)
         update(form);
     });
 
-if (btnBooking)
-    btnBooking.addEventListener('click', async (e) => {
+if (book)
+    book.addEventListener('click', async (e) => {
+        e.target.textContent = 'proosesing';
         const { tourId } = e.target.dataset;
         try {
             const session = await axios({
-                url: `http://127.0.0.1:8000/api/v1/users/checkout-session/${tourId}`,
+                url: `http://127.0.0.1:8000/api/v1/booking/checkout-session/${tourId}`,
             });
             console.log(session);
+
+            stripe.redirectToCheckout({
+                sessionId: session.data.session.id,
+            });
         } catch (err) {
             console.log(err.response.data);
         }
