@@ -62,9 +62,7 @@ const login = async (email, password) => {
             },
         });
         if (res.data.status === 'success') {
-            window.setTimeout(() => {
-                location.assign('/');
-            }, 500);
+            location.assign('/');
         }
         console.log(res);
     } catch (err) {
