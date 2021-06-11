@@ -10,6 +10,7 @@ router.get('/', bookingController.createBooking, authController.loginUser, contr
 router.get('/tour/:slug', authController.loginUser, controller.getTour);
 router.get('/login', authController.loginUser, controller.login);
 router.get('/Me', authController.loginUser, controller.account);
+router.get('/my-tours', authController.loginUser, controller.myTours);
 // router.get('/*', controller.error);
 
 module.exports = router;
