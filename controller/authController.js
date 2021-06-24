@@ -4,6 +4,7 @@ const catchAsync = require('./../utils/catchAsync');
 const AppError = require('../utils/appError');
 const sendEmail = require('./../utils/sendEmail');
 const crypto = require('crypto');
+
 const { clearCache } = require('../utils/casheServer');
 const createToken = (id, res, req) => {
     const token = jwt.sign({ id }, process.env.SECRET_KEY, {

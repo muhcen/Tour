@@ -45,6 +45,7 @@ exports.getAllOne = (Model) =>
 exports.getOne = (Model, populate) =>
     catchAsync(async (req, res, next) => {
         let doc;
+        console.log(1);
         if (populate)
             doc = await Model.findById(req.params.id)
                 .populate(populate)

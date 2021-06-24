@@ -12,6 +12,9 @@ header.header
         else
             a.nav__el(href="/login") Log in
             a.nav__el.nav__el--cta(href="#") Sign up
+            div.g-signin2(data-onsuccess="onSignIn")
+            a(href="#" onclick="signOut();") Sign out
+
     
     script(src="https://js.stripe.com/v3/")
 
